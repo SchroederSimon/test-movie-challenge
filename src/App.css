@@ -1,0 +1,32 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.movies {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  
+  gap: 16px;
+}
+
+.movie {
+  text-align: center;
+}
+
+.movie img {
+  border-radius: 8px;
+}
