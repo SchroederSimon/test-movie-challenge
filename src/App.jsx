@@ -1,6 +1,6 @@
 import './App.css'
 import { useEffect, useState, useRef } from 'react'
-import { useMovies } from './services/getMovies';
+import { useMovies } from './hooks/moviesHooks'
 
 function userSearch() {
   const [search, setSearch] = useState('');
@@ -24,7 +24,7 @@ function userSearch() {
 
 function App() {
   const { search, setSearch, error} = userSearch();
-  const { getMovies } = useMovies({ search })
+  const { movies, getMovies } = useMovies({ search })
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -49,13 +49,17 @@ function App() {
         {error && <p style={{ color: 'red' }}>{error}</p>}
       </header>
       <main>
-        <ul className='movies'>
-          <li className='movie'>
-            <h3>Titulo</h3>
-            <p>Año</p>
-            <img src="" alt="" />
+      <ul className='movies'>
+      {
+        movies.map((movie) => (
+          <li className='movie' key={movie.id}>
+            <h3>{movie.title}</h3>
+            <p>{movie.year}</p>
+            <img src={movie.image} alt={movie.title} />
           </li>
-        </ul>
+        ))
+      }
+    </ul>
       </main>
     </>
   )
