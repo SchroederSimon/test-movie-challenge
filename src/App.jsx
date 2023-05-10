@@ -1,6 +1,7 @@
 import './App.css'
 import { useEffect, useState, useRef } from 'react'
 import { useMovies } from './hooks/moviesHooks'
+import { Movies } from './components/moviesComponent'
 
 function userSearch() {
   const [search, setSearch] = useState('');
@@ -8,7 +9,7 @@ function userSearch() {
   const isFirstInput = useRef(true);
 
   useEffect(() => {
-    if (isFirstInput.current){
+    if (isFirstInput.current) {
       isFirstInput.current = search == ''
       return
     }
@@ -23,8 +24,8 @@ function userSearch() {
 }
 
 function App() {
-  const { search, setSearch, error} = userSearch();
-  const { movies, getMovies } = useMovies({ search })
+  const { search, setSearch, error } = userSearch();
+  const { movies, loading, getMovies } = useMovies({ search })
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -38,30 +39,27 @@ function App() {
 
 
   return (
-    <>
-      {/* -Necesita mostrar un input para buscar la película y un botón para buscar. */}
+    <div className="page">
       <header>
         <h1>Movie challenge</h1>
         <form className="form" onSubmit={handleSubmit}>
-          <input onChange={handleChange} value={search} name="search" placeholder="The godfather, Reservoir dogs..." type="text" />
+          <input
+            onChange={handleChange}
+            value={search} name="search"
+            placeholder="The godfather, Reservoir dogs..."
+            type="text" />
           <button type="submit">Search</button>
         </form>
         {error && <p style={{ color: 'red' }}>{error}</p>}
       </header>
+
       <main>
-      <ul className='movies'>
-      {
-        movies.map((movie) => (
-          <li className='movie' key={movie.id}>
-            <h3>{movie.title}</h3>
-            <p>{movie.year}</p>
-            <img src={movie.image} alt={movie.title} />
-          </li>
-        ))
-      }
-    </ul>
+        {
+          loading ? <p>Cargando...</p> : <Movies movies={movies} />
+        }
+
       </main>
-    </>
+    </div>
   )
 }
 

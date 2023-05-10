@@ -1,32 +1,56 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 main {
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: 80%;
+}
+
+form {
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 
 .movies {
+  list-style: none;
   margin: 0;
   padding: 0;
-  list-style: none;
-  width: 100%;
 
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+ 
+  width: 100%;
+  gap: 20px;
 }
 
 .movie {
   text-align: center;
 }
 
+.movie h3, .movie p {
+  margin: 0;
+}
+
 .movie img {
   border-radius: 8px;
+  margin-top: 16px;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #fffefe;
+  cursor: pointer;
+  transition: border-color 0.25s;
 }
